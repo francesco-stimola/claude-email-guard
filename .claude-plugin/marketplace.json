@@ -1,0 +1,6 @@
+{
+  "name": "claude-email-guard",
+  "owner": { "name": "Francesco Stimola" },
+  "description": "email-guard: keeps your own email address from leaving the machine through Claude Code.",
+  "plugins": [{ "name": "email-guard", "source": "./" }]
+}

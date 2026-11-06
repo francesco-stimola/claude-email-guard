@@ -1,0 +1,99 @@
+<!doctype html>
+<!--
+  Source of assets/logo-light.png and assets/logo-dark.png (2560x400).
+  Render with a headless Chromium, once per theme:
+    msedge --headless --hide-scrollbars --default-background-color=00000000
+           --window-size=2560,400 --screenshot=logo-light.png "banner.html"
+    msedge ... --screenshot=logo-dark.png "banner.html?theme=dark"
+-->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>claude-email-guard banner</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Barlow:wght@600&family=JetBrains+Mono:wght@700&display=block" rel="stylesheet">
+<style>
+  :root {
+    --ink: #17202a;
+    --accent: #5b40c4;
+    --muted: #5b6b7c;
+  }
+  :root[data-theme="dark"] {
+    --ink: #e9eef4;
+    --accent: #a18cff;
+    --muted: #8a9bb0;
+  }
+  html, body {
+    margin: 0;
+    width: 2560px;
+    height: 400px;
+    background: transparent;
+    overflow: hidden;
+  }
+  .banner {
+    display: flex;
+    align-items: center;
+    gap: 78px;
+    height: 400px;
+    padding-left: 478px;
+  }
+  .icon {
+    width: 256px;
+    height: 256px;
+    flex: none;
+  }
+  .wordmark {
+    font-family: "JetBrains Mono", monospace;
+    font-weight: 700;
+    font-size: 117px;
+    line-height: 1;
+    letter-spacing: -0.01em;
+    color: var(--ink);
+  }
+  .wordmark span {
+    color: var(--accent);
+  }
+  .tagline {
+    margin-top: 34px;
+    font-family: "Barlow", sans-serif;
+    font-weight: 600;
+    font-size: 46px;
+    letter-spacing: 0.16em;
+    color: var(--muted);
+  }
+</style>
+</head>
+<body>
+<div class="banner">
+  <svg class="icon" viewBox="0 0 256 256" aria-hidden="true">
+    <defs>
+      <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+        <stop offset="0" stop-color="#7c62dc"/>
+        <stop offset="1" stop-color="#47309c"/>
+      </linearGradient>
+    </defs>
+    <rect width="256" height="256" rx="56" fill="url(#bg)"/>
+    <!-- the email -->
+    <g fill="none" stroke="#fff" stroke-width="13" stroke-linecap="round" stroke-linejoin="round">
+      <rect x="40" y="54" width="144" height="104" rx="16"/>
+      <path d="M50 68 L112 112 L174 68"/>
+    </g>
+    <!-- the guard: a shield over the corner, cut from the envelope by a ring -->
+    <path d="M180 110 L218 124 V154 C218 180 202 198 180 208 C158 198 142 180 142 154 V124 Z"
+          fill="#fff" stroke="#4f37a6" stroke-width="16" stroke-linejoin="round" paint-order="stroke"/>
+    <g fill="#4f37a6" stroke="#4f37a6" stroke-linecap="round">
+      <circle cx="180" cy="148" r="11" stroke="none"/>
+      <path d="M180 152 V176" stroke-width="10" fill="none"/>
+    </g>
+  </svg>
+  <div>
+    <div class="wordmark">claude-email<span>-guard</span></div>
+    <div class="tagline">FIND · DROP · BLOCK</div>
+  </div>
+</div>
+<script>
+  if (new URLSearchParams(location.search).get("theme") === "dark")
+    document.documentElement.dataset.theme = "dark";
+</script>
+</body>
+</html>

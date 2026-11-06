@@ -1,0 +1,21 @@
+{
+  "name": "email-guard",
+  "version": "1.0.0",
+  "description": "Keeps your own email address out of Claude's context and blocks tool calls that would send it off the machine.",
+  "author": { "name": "Francesco Stimola" },
+  "license": "MIT",
+  "userConfig": {
+    "extraEmails": {
+      "type": "string",
+      "title": "Extra addresses",
+      "description": "More addresses to protect, separated by commas. The Claude login and git config addresses are found on their own.",
+      "default": ""
+    },
+    "keepInContext": {
+      "type": "boolean",
+      "title": "Keep the account email in Claude's context",
+      "description": "Off: the userEmail block is dropped, so Claude never sees the address. Tool calls are guarded either way.",
+      "default": false
+    }
+  }
+}
