@@ -1,0 +1,48 @@
+name: Release
+
+on:
+  push:
+    tags: ['v*']
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    name: Package and publish
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v7
+
+      - name: Read the release notes
+        run: |
+          version=${GITHUB_REF_NAME#v}
+          awk -v v="$version" '/^## / { p = ($2 == v) } p' CHANGELOG.md | tail -n +2 > "$RUNNER_TEMP/notes.md"
+          if [ ! -s "$RUNNER_TEMP/notes.md" ]; then
+            echo "CHANGELOG.md has no section for $version" >&2
+            exit 1
+          fi
+          echo "VERSION=$version" >> "$GITHUB_ENV"
+
+      - name: The manifest names the same version
+        run: |
+          manifest=$(jq -r .version .claude-plugin/plugin.json)
+          if [ "$manifest" != "$VERSION" ]; then
+            echo "plugin.json says $manifest, the tag says $VERSION" >&2
+            exit 1
+          fi
+
+      - name: Package
+        run: |
+          mkdir -p "$RUNNER_TEMP/dist"
+          zip -X -r "$RUNNER_TEMP/dist/email-guard-$VERSION.plugin" .claude-plugin/plugin.json hooks LICENSE README.md
+          (cd "$RUNNER_TEMP/dist" && sha256sum ./* > SHA256SUMS)
+
+      - name: Publish the release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh release create "$GITHUB_REF_NAME" \
+            --title "claude-email-guard $VERSION" \
+            --notes-file "$RUNNER_TEMP/notes.md" \
+            "$RUNNER_TEMP"/dist/*

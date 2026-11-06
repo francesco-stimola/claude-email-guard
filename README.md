@@ -12,7 +12,8 @@
 
 No prompts · runs inside Claude Code · nothing to configure · fails closed
 
-[![Latest release](https://img.shields.io/github/v/tag/francesco-stimola/claude-email-guard?sort=semver&label=release)](https://github.com/francesco-stimola/claude-email-guard/tags)
+[![Release](https://github.com/francesco-stimola/claude-email-guard/actions/workflows/release.yml/badge.svg)](https://github.com/francesco-stimola/claude-email-guard/actions/workflows/release.yml)
+[![Latest release](https://img.shields.io/github/v/release/francesco-stimola/claude-email-guard?sort=semver&label=release)](https://github.com/francesco-stimola/claude-email-guard/releases/latest)
 [![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 [![Tested on Claude Code 2.1.318](https://img.shields.io/badge/tested%20on-Claude%20Code%202.1.318-5b40c4.svg)](#quick-start)
 [![Dependencies: none](https://img.shields.io/badge/dependencies-none-green.svg)](#how-it-works)
